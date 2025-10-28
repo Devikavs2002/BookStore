@@ -1,0 +1,31 @@
+@import "tailwindcss";
+*{
+  box-sizing: border-box;
+ font-family: "Roboto", sans-serif;
+}
+.img-container {
+  background-image: url(https://www.shutterstock.com/image-photo/book-pile-old-books-on-600nw-2485328203.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  margin-top: -30px;
+}
+#AuthBg{
+   background-image: url(https://images.unsplash.com/photo-1645897938945-7b1b53239ea6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100;
+}
+.box{
+  height: 80px;
+  width: 350px;
+}
+th,td{
+  border: 1px solid;
+
+}
+.profile{
+  margin-top: -17px;
+}
+
