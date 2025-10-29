@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { createUser, googleLogin, loginUser } from "../services/AllApi"
+
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import { createUser, googleLogin, loginUser } from "../services/allApi";
 
 const Auth = ({ insideRegister }) => {
   const navigate = useNavigate();
