@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { BaseUrl } from "../services/bseUrl";
 import { getSingleBook } from "../services/allApi";
-
+import { loadStripe } from "@stripe/stripe-js";
 
 const ViewBooks = () => {
   const [bookDetails, setBookDetails] = useState({});
@@ -19,11 +19,17 @@ const ViewBooks = () => {
     console.log(apiResponse);
     setBookDetails(apiResponse.data);
   };
+  const buyBook = async () => {
+    const stripe = await loadStripe(
+      pk_test_51SO0QkFQadLdxUWVtYqLBwmu5iHWh2iAnEtKZvpwrEZnonIHG75ajkqzGX69bh2zT9eEDYpH7YxxjOKhvqXsmeFP00jHh09NmA
+    );
+    console.log(stripe);
+  };
   return (
     <div>
       <div className="mx-30 my-30 border p-5">
-        <h1 className="text-center text-5xl">{bookDetails?.title}</h1>
-        <h5 className="text-center text-2xl bg-blue-800">
+        <h1 className="text-center text-xl">{bookDetails?.title}</h1>
+        <h5 className="text-center text-xl bg-blue-800">
           {bookDetails?.author}
         </h5>
         <div className="grid grid-cols-[1fr_5fr] gap-10">
@@ -51,6 +57,12 @@ const ViewBooks = () => {
             >
               Go Back
             </Link>
+            <button
+              onClick={buyBook}
+              className="bg-green-800 w-20 mt-3 ms-5 p-2 rounded text-xl"
+            >
+              Buy Book{" "}
+            </button>
           </div>
         </div>
       </div>

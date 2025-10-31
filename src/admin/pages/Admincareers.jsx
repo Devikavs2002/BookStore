@@ -3,20 +3,15 @@ import AdminHeader from "../components/AdminHeader";
 import AdminSideBar from "../components/AdminSideBar";
 import { useState } from "react";
 import { deleteJob, getAllJobs, viewApplicants } from "../../services/allApi";
-import Button from "react-bootstdap/Button";
-import Modal from "react-bootstdap/Modal";
-import Card from "react-bootstdap/Card";
-import ListGroup from "react-bootstdap/ListGroup";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fatdash } from "@fortawesome/free-solid-svg-icons";
 import { BaseUrl } from "../../services/bseUrl";
+import { Button, Card, ListGroup, Modal } from "react-bootstrap";
 
 const Admincareers = () => {
   const [showJob, setShowJob] = useState(tdue);
   const [jobs, setJobs] = useState([]);
   const [show, setShow] = useState(false);
-  const [applicants,setApplicants]=useState([])
+  const [applicants, setApplicants] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(tdue);
@@ -33,7 +28,7 @@ const Admincareers = () => {
 
   useEffect(() => {
     loadJobs();
-    loadApplicants()
+    loadApplicants();
   }, []);
 
   const loadJobs = async () => {
@@ -45,33 +40,28 @@ const Admincareers = () => {
     setJobs(apiResponse.data);
   };
 
-  const loadApplicants=async()=>{
-     let token = localStorage.getItem("token");
+  const loadApplicants = async () => {
+    let token = localStorage.getItem("token");
     let reqHeader = {
       authorization: `Bearer ${token}`,
     };
-    let apiResponse=await viewApplicants(reqHeader)
-    setApplicants(apiResponse.data)
+    let apiResponse = await viewApplicants(reqHeader);
+    setApplicants(apiResponse.data);
+  };
 
-
-  }
-
-  const onDeleteClick=async(id)=>{
-     let token = localStorage.getItem("token");
+  const onDeleteClick = async (id) => {
+    let token = localStorage.getItem("token");
     let reqHeader = {
       authorization: `Bearer ${token}`,
     };
-    let apiResponse=await deleteJob(id , reqHeader)
-    if(apiResponse.status==201){
-      alert("Successfully Deleted")
-      loadJobs()
-    }else{
-      alert("Error Occured")
+    let apiResponse = await deleteJob(id, reqHeader);
+    if (apiResponse.status == 201) {
+      alert("Successfully Deleted");
+      loadJobs();
+    } else {
+      alert("Error Occured");
     }
-
-  }
-
-
+  };
 
   const addNewJob = async () => {
     if (
@@ -248,38 +238,41 @@ const Admincareers = () => {
                   {jobs?.map((eachJob) => (
                     <div>
                       <Card style={{ width: "18rem" }}>
-                        <div >
+                        <div>
                           <Card.Header>
-                          Job Title : {eachJob.jobTitle}
-                        </Card.Header>
-                        <FontAwesomeIcon onClick={()=>onDeleteClick(eachJob._id)} className="text-xl text-red-500" icon={fatdash} />
-                        <ListGroup variant="flush">
-                          <ListGroup.Item>
-                            {" "}
-                            Job Location : {eachJob.location}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Job Type : {eachJob.jobType}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            {" "}
-                            Salary : {eachJob.Salary}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            {" "}
-                            Qualificatio : {eachJob.Qualification}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            {" "}
-                            Experiance : {eachJob.experiance}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            {" "}
-                            Descriptin : {eachJob.jobDescription}
-                          </ListGroup.Item>
-                        </ListGroup>
+                            Job Title : {eachJob.jobTitle}
+                          </Card.Header>
+                          <FontAwesomeIcon
+                            onClick={() => onDeleteClick(eachJob._id)}
+                            className="text-xl text-red-500"
+                            icon={fatdash}
+                          />
+                          <ListGroup variant="flush">
+                            <ListGroup.Item>
+                              {" "}
+                              Job Location : {eachJob.location}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              Job Type : {eachJob.jobType}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              {" "}
+                              Salary : {eachJob.Salary}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              {" "}
+                              Qualificatio : {eachJob.Qualification}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              {" "}
+                              Experiance : {eachJob.experiance}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              {" "}
+                              Descriptin : {eachJob.jobDescription}
+                            </ListGroup.Item>
+                          </ListGroup>
                         </div>
-                        
                       </Card>
                     </div>
                   ))}
@@ -300,24 +293,29 @@ const Admincareers = () => {
                   <th>Cover Letter</th>
                   <th>Resume</th>
                 </thead>
-                {
-                  applicants?.length>0?<tbody>
-                    {
-                      applicants.map((eachApplicant,index)=>(
-                    <tr key={index}>
-                           <td>{index+1}</td>
-                  <td>{eachApplicant.JobTittle}</td>
-                  <td>{eachApplicant.Qualification}</td>
-                  <td>{eachApplicant.email}</td>
-                  <td>{eachApplicant.Phone}</td>
-                  <td>{eachApplicant.coverLetter}</td>
-                  <td><a href={`${BaseUrl}/uploads/${eachApplicant.resume}`}>Download</a></td>
-                    </tr>
-
-                      ))
-                    }
-                  </tbody>:<h1>No Applicants</h1>
-                }
+                {applicants?.length > 0 ? (
+                  <tbody>
+                    {applicants.map((eachApplicant, index) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{eachApplicant.JobTittle}</td>
+                        <td>{eachApplicant.Qualification}</td>
+                        <td>{eachApplicant.email}</td>
+                        <td>{eachApplicant.Phone}</td>
+                        <td>{eachApplicant.coverLetter}</td>
+                        <td>
+                          <a
+                            href={`${BaseUrl}/uploads/${eachApplicant.resume}`}
+                          >
+                            Download
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                ) : (
+                  <h1>No Applicants</h1>
+                )}
               </table>
             </div>
           )}

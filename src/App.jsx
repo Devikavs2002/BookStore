@@ -16,6 +16,8 @@ import AdminHome from './admin/pages/AdminHome'
 import Admincareers from './admin/pages/Admincareers'
 import Profile from './pages/Profile'
 import ViewBooks from './pages/ViewBooks'
+import PaymentSuccess from './components/PaymentSuccess'
+import PaymentFailure from './components/PaymentFailure'
 
 
 function App() {
@@ -39,6 +41,9 @@ function App() {
        <Route path='/my-books' element={<AllBooks/>}/>
        {/* Route params */}
        <Route path='/view-book/:id' element={<ViewBooks/>}/>
+
+       <Route path='/payment-success' element={<PaymentSuccess/>}/>
+           <Route path='/payment-failure' element={<PaymentFailure/>}/>
 
        
        <Route path='/admin-books' element={<AdminBooks/>}/>
