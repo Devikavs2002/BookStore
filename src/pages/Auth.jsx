@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
-
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { createUser, googleLogin, loginUser } from "../services/allApi";
+import { AuthContext } from "../context/AuthContext";
+
 
 const Auth = ({ insideRegister }) => {
   const navigate = useNavigate();
+
+  const {saveToken}=useContext(AuthContext)
+  
   const [formData, setformData] = useState({
     userName: "",
     password: "",
@@ -38,7 +42,8 @@ const Auth = ({ insideRegister }) => {
         toast("Successfully Logined");
         console.log(apiResponse);
 
-        localStorage.setItem("token", apiResponse.data.token);
+        // localStorage.setItem("token",apiResponse.data.token)
+        saveToken(apiResponse.data.token)
         localStorage.setItem("user", JSON.stringify(apiResponse.data.user));
 
         if (apiResponse.data.user.email == "admin@gmail.com") {

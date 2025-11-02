@@ -60,18 +60,31 @@ export const getAllJobs = async (reqHeader) => {
   return await commonApi("get", `${BaseUrl}/getAlljobs`, "", reqHeader);
 };
 
-export const addNewJob = async (reqBody,reqHeader) => {
-  return await commonApi("post", `${BaseUrl}/createJob`,reqBody , reqHeader);
+export const addNewJob = async (reqBody, reqHeader) => {
+  return await commonApi("post", `${BaseUrl}/createJob`, reqBody, reqHeader);
 };
 
-export const deleteJob = async (id,reqHeader) => {
-  return await commonApi("delete", `${BaseUrl}/${id}/deleteJob`,{} , reqHeader);
+export const deleteJob = async (id, reqHeader) => {
+  return await commonApi("delete", `${BaseUrl}/${id}/deleteJob`, {}, reqHeader);
 };
 
-export const applyJob=async(reqBody,reqHeader)=>{
-  return await commonApi("post",`${BaseUrl}/addApplictaion`,reqBody,reqHeader)
-}
+export const applyJob = async (reqBody, reqHeader) => {
+  return await commonApi(
+    "post",
+    `${BaseUrl}/addApplictaion`,
+    reqBody,
+    reqHeader
+  );
+};
 
-export const viewApplicants=async(reqHeader)=>{
-  return await commonApi("get",`${BaseUrl}/viewApplicantions`,reqHeader)
-}
+export const viewApplicants = async (reqHeader) => {
+  return await commonApi("get", `${BaseUrl}/viewApplicantions`, reqHeader);
+};
+
+export const makePayment = async (reqBody, reqHeader) => {
+  return await commonApi("put", `${BaseUrl}/makePayment`, reqBody, reqHeader);
+};
+
+export const getPayments = async (reqBody, reqHeader) => {
+  return await commonApi("get", `${BaseUrl}/getPayments`, reqBody, reqHeader);
+};

@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Link } from "react-router";
-import Footer from "../components/Footer";
-
 import { Card } from "flowbite-react";
 import { BaseUrl } from "../services/bseUrl";
 import { getAllbooks } from "../services/allApi";
+import { AuthContext } from "../context/AuthContext";
 
 const AllBooks = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [category, setCategory] = useState([]);
   const [books, setBooks] = useState([]);
-
   const [duplicateBooks, setDuplicateBooks] = useState([]);
+
+  const { token } = useContext(AuthContext);
+
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);
+       getBooks();
     }
-    getBooks();
+   
   }, []);
 
   const getBooks = async (search) => {
     try {
-      let token = localStorage.getItem("token");
       let header = {
         authorization: `Bearer ${token}`,
       };

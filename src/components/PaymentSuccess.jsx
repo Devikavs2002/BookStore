@@ -7,7 +7,7 @@ const PaymentSuccess = () => {
           Payment Success
 
         </h1>
-       <div className='flex justify-center'>
+       <div className='flex justify-center '>
          <img src="https://maxihealthapp.maxicare.com.ph/images/success.gif" alt="Success" />
        </div>
     </div>

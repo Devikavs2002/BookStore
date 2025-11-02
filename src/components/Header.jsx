@@ -4,19 +4,44 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { Dropdown, DropdownItem } from "flowbite-react";
+import { AuthContext } from "../context/AuthContext";
+
 
 const Header = () => {
   const [isLoggined, setLoggined] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
+
+  const [logout, setLogout] = useState(false);
+
+  const {logoutUser}=useContext(AuthContext)
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (token) {
       setLoggined(true);
+    } else {
+      setLoggined(false);
     }
-  }, []);
+    let user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      setUserDetails(user);
+    } else {
+      setUserDetails({});
+    }
+  }, [logout]);
+
+  const onLogOutClick = () => {
+    // localStorage.clear();
+    logoutUser()
+    setLogout(true);
+    navigate("/");
+  };
 
   return (
     <div>
@@ -32,23 +57,33 @@ const Header = () => {
           <FontAwesomeIcon icon={faXTwitter} />
           <FontAwesomeIcon icon={faFacebook} />
 
-          {
-            isLoggined?<span>
-               <Dropdown label="Options" className="text-green-900" >
-      <DropdownItem>
-        <Link to={'/profile'}>Profile</Link>
-      </DropdownItem>
-      <DropdownItem>LogOut</DropdownItem>
-      
-    </Dropdown>
-            </span>:
+          {isLoggined ? (
+            <div className="relative">
+              <img
+                className="w-10 rounded-3xl absolute "
+                src={userDetails?.profile}
+                alt=""
+              />
+              <Dropdown
+                dismissOnClick={false}
+                className=" text-3xl  text-transparent"
+              >
+                <DropdownItem>
+                  <Link to={"/profile"}>Profile</Link>
+                </DropdownItem>
+                <DropdownItem>
+                  <button onClick={onLogOutClick}>Logout</button>
+                </DropdownItem>
+              </Dropdown>
+            </div>
+          ) : (
             <Link
-            to={"/login"}
-            className="mx-5 border-black p-3 rounded-4xl cursor-pointer"
-          >
-            Login
-          </Link>
-          }
+              to={"/login"}
+              className="mx-5 border-black p-3 rounded-4xl cursor-pointer"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
       <div className="bg-black">

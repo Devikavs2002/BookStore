@@ -39,36 +39,36 @@ const Contact = () => {
         </div>
         <div className="row">
           <div className="col-6 m-4">
-             <div class="bg-gray-200 p-8 rounded shadow-md w-full max-w-md ">
-    <h2 class="text-center text-lg font-semibold mb-6">Send me Message</h2>
+             <div className="bg-gray-200 p-8 rounded shadow-md w-full max-w-md ">
+    <h2 className="text-center text-lg font-semibold mb-6">Send me Message</h2>
 
    
       <input
         type="text"
         placeholder="Name"
-        class="w-full p-3 rounded border  focus:ring-1  bg-white"
+        className="w-full p-3 rounded border  focus:ring-1  bg-white"
         required
       />
 
       <input
         type="email"
         placeholder="Email Id"
-        class="w-full p-3 rounded border  focus:ring-1 bg-white"
+        className="w-full p-3 rounded border  focus:ring-1 bg-white"
         required
       />
 
       <textarea
         rows="6"
         placeholder="Message"
-        class="w-full p-3 rounded border focus:outline-none focus:ring-2 bg-white"
+        className="w-full p-3 rounded border focus:outline-none focus:ring-2 bg-white"
         required
       ></textarea>
 
       <button
         type="submit"
-        class="bg-gray-900 text-white w-full py-3 rounded flex items-center justify-center gap-2-800 transition"
+        className="bg-gray-900 text-white w-full py-3 rounded flex items-center justify-center gap-2-800 transition"
       >
-        Send <i class="fas fa-paper-plane"></i>
+        Send <i className="fas fa-paper-plane"></i>
       </button>
    
   </div>

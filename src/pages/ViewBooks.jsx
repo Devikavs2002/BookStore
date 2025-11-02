@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { BaseUrl } from "../services/bseUrl";
-import { getSingleBook } from "../services/allApi";
+import { getSingleBook, makePayment } from "../services/allApi";
 import { loadStripe } from "@stripe/stripe-js";
 
 const ViewBooks = () => {
@@ -23,7 +23,29 @@ const ViewBooks = () => {
     const stripe = await loadStripe(
       pk_test_51SO0QkFQadLdxUWVtYqLBwmu5iHWh2iAnEtKZvpwrEZnonIHG75ajkqzGX69bh2zT9eEDYpH7YxxjOKhvqXsmeFP00jHh09NmA
     );
-    console.log(stripe);
+    let token = localStorage.getItem("token");
+    let reqHeader = {
+      authorization: `Bearer ${token}`,
+    };
+    let reqBody = {
+      bookDetails: bookDetails,
+    };
+
+    let apiResponse = await makePayment(reqBody, reqHeader);
+
+    if (apiResponse.status == 200) {
+      let session = apiResponse.data.session;
+      window.location.href = session.url;
+
+      // const response = stripe.redirectToCheckout({
+      //   sessionId: sessionId,
+      // });
+      if (response.error) {
+        console.log("Error");
+      }
+    } else {
+      console.log("Error Occurred");
+    }
   };
   return (
     <div>
